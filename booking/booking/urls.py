@@ -18,13 +18,15 @@ from django.urls import path
 from bookingApp import views
 from django.conf import settings
 from django.conf.urls.static import static
+app_name = 'booking'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
     path('book/',views.book, name='book'),
     path('staff/login/', views.adminLogin, name='admin_login'),
-    path('staff/dashboard/', views.adminDash),
+    path('staff/dashboard/', views.adminDash, name='admin_dash'),
+    path('staff/reservation-list/', views.reservations, name="reservation_list"),
     path('staff/logout',views.adminLogout, name='admin_logout'),
     path('request-availability/',views.requestAvailability, name='request_availability'),
     path('create-reservation/',views.createReservation, name='create_reservation'),
