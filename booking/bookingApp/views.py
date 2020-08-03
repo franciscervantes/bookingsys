@@ -149,6 +149,11 @@ def adminLogout(request):
     logout(request)
     return redirect('/')
 
+@login_required
+def reservations(request):
+	reservations = Reservation.objects.all()
+	return render(request, 'reservation_list.html', {'reservations':reservations})
+
 
 
 

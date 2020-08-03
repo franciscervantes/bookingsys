@@ -47,7 +47,7 @@ class Reservation(models.Model):
     last_name = models.CharField(max_length=128) 
     client_email = models.CharField(max_length=128)
     client_phone = models.CharField(max_length=128)
-    room_id = models.ForeignKey('Room', on_delete=models.DO_NOTHING)
+    room_id = models.ForeignKey('Room', on_delete=models.CASCADE)
     date_in = models.DateField()
     date_out = models.DateField()
 

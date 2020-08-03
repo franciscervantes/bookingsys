@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/book.css' %}">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+ 
+</head>
+
+
+<body>
+
+{% block content %}
+
+<form id ="reservation-form" action="" method="post" data-ajax-target="{% url 'create_reservation' %}">
+{% csrf_token %}
+{{ reservation_form.as_p}}
+<input type="submit" value="Submit">
+
+{% for room in room_type %}
+
+<div class = "room_details" id = "{{room.room_type_id}}">
+	{{room.type_name}} : {{room.price}}
+
+</div>
+
+{% endfor %}
+{% endblock %}
+
+<!-- {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %} -->
+ <script type="text/javascript">     window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+<script src="{% static 'js/app.js' %}"></script>
+
+ {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'info' %}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'warning' %}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'error' %}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+<script>
+</script>
+
+
+</body>
+</html>
+
